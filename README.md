@@ -12,7 +12,6 @@
 
 또한 초기 내용은 번역기를 사용하여 문맥 상 문제가 있을 수 있습니다. 이 역시 지속적으로 수정하고, 다듬고자 합니다.
 
-- 2022. 06. 10. / 1.3 중간까지 번역
 
 ## 목차   
 ### 0. 개요   
@@ -148,7 +147,21 @@ component	부품	부품	수량
   그러나 많은 상업, 정부기관, 과학 데이터 뱅크의 일부 관계들은 꽤나 높은 차원입니다.(30차원 정도는 드문 일이 아닙니다.) 사용자는 일반적으로 어떤 관계의 도메인 순서(공급 관계에서의 예 : 공급자 주문, 부품, 프로젝트, 수량)를 기억하는데 부담이 없어야 합니다. 따라서 우리는 도메인 순서가 있는 관계가 아닌 순서가 없는 동일한 도메인을 갖는 관계(relationships)를 제안합니다. 이를 위해 도메인은 적어도 주어진 관계 내에서 위치를 사용하지 않고 고유하게 식별 가능해야 한다. 따라서 두 개 이상의 동일한 도메인이 있는 경우, 우리는 각각의 경우에 도메인 이름이 주어진 관계에서 해당 도메인이 수행하는 역할을 식별하는 고유한 역할 이름으로 한정되어야 한다. 예를 들어, 그림 2의 관계 구성요소에서 첫 번째 도메인 부품은 서브, 두 번째 도메인 부품은 수퍼로 한정될 수 있으므로 사용자는 이러한 도메인 간의 순서와 관계없이 관계(relationship) 구성요소와 해당 도메인(sub.part super.part, 수량)을 처리할 수 있습니다.
   
  요약하면, 대부분의 사용자는 시간 변동 관계(= relationships)(relation 대신에) 모음으로 구성된 데이터의 관계형 모델과 상호 작용해야 한다고 제안합니다. 각 사용자는 도메인 이름(필요할 때마다 역할이 한정됨)과 함께 이름 이상의 관계(relationship)를 알 필요가 없습니다. 이 정보조차도 사용자의 요청에 따라 시스템에 의해 메뉴 스타일로 제공될 수 있습니다(보안 및 개인 정보 제한에 따라).
+
+일반적으로 데이터 뱅크를 설정을 위한 관계형 모델에는 많은 대안들이 있습니다. 선호하는 방법(또는 기본 형태)을 논의하기 위해 우리는 반드시 먼저 몇 가지 추가 개념(활성 도메인, 기본 키, 외래 키, 단순하지 않은 도메인)을 도입하고 정보 시스템 프로그래밍에서 현재 사용 중인 용어와 일부 링크를 설정해야 합니다. 이 논문의 나머지 부분에서 우리는 분명한 이점이 있는 경우를 제외하고서는 relation과 relationship 을 구분짓지 않을 것입니다.
+부품과 프로젝트, 공급자에 관한 관계를 포함하는 데이터 뱅크의 예를 생각해 보십시오. 부품이라는 하나의 관계가 다음 도메인에 정의됩니다.
+
+(1) 부품 번호
+(2) 부품 이름
+(3) 부품 색
+(4) 부품 무게
+(5) 보유 수량
+(6) 주문 수량
+
+다른 도메인 역시 가능합니다. 사실 이러한 도메인 각각은 값의 풀(pool of value)이고, 이들 중 일부 또는 전체는 어느 순간(시점)에 데이터 뱅크에 표시될 수 있습니다. 몇몇 시점에 모든 부품 색이 있을 수 있지만, 부품 무게, 이름, 번호 모두가 존재하기는 힘들 것입니다. 우리는 한 시점에 표현된 값의 집합(set of value)을 순간의 활성화된 도메인(active domain)이라고 부를 것입니다. 
  
+ 일반적으로, 관계가 주어진 하나의 도메인(또는 도메인의 결합)은 해당 관계의 각 요소(n - 튜플)을 고유하게 식별하는 값을 가집니다. 이러한 도메인(또는 결합)을 기본키(primary key)라고 부릅니다. 위의 사례에서, 부품 번호는 기본키이지만, 부품 색은 기본키가 아닙니다. 기본키가 간단한 도메인이나 결합 중 하나로 중복되지 않는다면, 참여중인 간단한 도메인들은 각 요소를 고유하게 식별하지 않아도 된니다.//
+
   The term relation is used here in its accepted mathematical sense. Given sets S1, S2, ···, Sn, (not necessarily distinct), R is a relation on these n sets if it is a set of n-tuples each of which has its first element from S1, its second element from S2, and so on. We shall refer to Sj as the jth domain of R. As defined above, R is said to have degree n. Relations of degree 1 are often called unary, degree 2 binary, degree 3 ternary, and degree n n-ary.
   
  For expository reasons, we shall frequently make use of an array representation of relations, but it must be remembered that this particular representation is not an essential part of the relational view being expounded. An array which represents an n-ary relation R has the following properties:
