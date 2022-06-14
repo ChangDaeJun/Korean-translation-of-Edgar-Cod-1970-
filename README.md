@@ -235,3 +235,32 @@ In previous work there has been a strong tendency to treat the data in a data ba
 So far, we have discussed examples of relations which are defined on simple domainsÑdomains whose elements are atomic (nondecomposable) values. Nonatomic values can be discussed within the relational framework. Thus, some domains may have relations as elements. These relations may, in turn, be defined on nonsimple domains, and so on. For example, one of the domains on which the relation employee is defined might be salary history. An element of the salary history domain is a binary relation defined on the domain date and the domain salary. The salary history domain is the set of all such binary relations. At any instant of time there are as many instances of the salary history relation in the data bank as there are employees. In contrast, there is only one instance of the employee relation.
 
 The terms attribute and repeating group in present data base terminology are roughly analogous to simple domain and nonsimple domain, respectively. Much of the confusion in present terminology is due to failure to distinguish between type and instance (as in "record") and between components of a user model of the data on the one hand and their machine representation counterparts on the other hand (again, we cite "record" as an example).
+
+### 1.4. 일반적인 형태
+
+ 도메인 전부가 간단한 관계는 위에서 논의했던 것 처럼 2차원의 동등한 열 배열로 저장소에서 표현될 수 있습니다. 하나 이상의 단순하지 않는 도메인과의 관계를 위해서는 보다 복잡한 데이터 구조들이 필요합니다. 이러한 이유로(그리고 아래 인용될 다른 것들도) 단순하지 않는 도메인을 제거하는 가능성은 조사해 볼 가치가 있습니다. 사실 정상화라 불리는 매우 간단한 제거 절차가 있습니다.
+ 
+ 예를 들어, 그림 3(a)에 표시된 관계들의 집합을 고려해봅시다. 작업 기록와 자녀는 직원 관계에서 단순하지 않는 도메인입니다. 월급 기록은 작업 기록 관계에서 단순하지 않는 도메인입니다. 그림 3(a)의 트리는 단순하지 않는 도메인의 상호관계를 보여줍니다.
+ 
+정규화 과정은 다음과 같습니다. 먼저 트리의 맨 위에 있는 관계에서 기본키를 가져온 뒤, 도메인 또는 도메인 결합인 이 기본키를 각각의 직속 종속관계에 넣음으로써 이를 확장합니다. 각 확장된 관계에서의 기본키는 부모 관계로부터 기본키를 받아 확장되기 전의 기본키로 구성됩니다. 이제 부모 관계에서 단순하지 않는 모든 도메인들을 제거한뒤 트리의 최상위 노드를 제거하고, 남아있는 각 하위 트리에서 같은 작업을 반복합니다.
+
+그림 3(a)의 관계들을 정규화한 결과는 그림 3(b)의 관계 집합입니다. 정규화로 어떤 키가 확장되었는지 보여주기 위해 각 관계의 기본키는 기울림꼴로 나타냈습니다. 위에서 설명한 정규화가 적용 가능하다면, 정규화되지 않는 관계들의 집합은 반드시 다음 조건을 만족합니다.
+
+(1) 단순하지 않은 도메인의 상호 관계에 대한 그래프는 트리의 모음입니다.
+(2) 단순하지 않은 도메인의 구성에는 기본키가 없습니다.?
+
+1.4. NOMAL FORM
+
+A relation whose domains are all simple can be represented in storage by a two-dimensional column-homogeneous array of the kind discussed above. Some more complicated data structure is necessary for a relation with one or more non simple domains. For this reason (and others to be cited below) the possibility of eliminating non simple domains appears worth investigating. There is, in fact, a very simple elimination procedure, which we shall call normalization.
+
+ Consider, for example, the collection of relations exhibited in Figure 3(a). Job history and children are non simple domains of the relation employee. Salary history is a non simple domain of the relation job history. The tree in Figure 3(a) shows just these interrelationships of the non simple domains.
+
+ Normalization proceeds as follows. Starting with the relation at the top of the tree, take its primary key and expand each of the immediately subordinate relations by inserting this primary key domain or domain combination. The primary key of each expanded relation consists of the primary key before expansion augmented by the primary key copied down from the parent relation. Now, strike out from the parent relation all non simple domains, remove the top node of the tree, and repeat the same sequence of operations on each remaining subtree.
+
+ The result of normalizing the collection of relations in Figure 3 (a) is the collection in Figure 3(b). The primary key of each relation is italicized to show how such keys are expanded by the normalization.
+
+If normalization as described above is to be applicable, the unnormalized collection of relations must satisfy the following conditions :
+
+(1) The graph of interrelationships of the non simple domains is a collection of trees.
+
+(2) No primary key has a component domain which is non simple.
