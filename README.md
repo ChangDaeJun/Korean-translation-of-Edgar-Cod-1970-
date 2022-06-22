@@ -47,7 +47,7 @@
 
 KEY WORDS AND PHRASES : data bank, data base, data structure, data organization, hierarchies of data, networks of data, relations, derivability, redundancy, consistency, composition, join, retrieval language, predicate calculus, security, data integrity
 
-## 1. 관계형 모델과 일반적 형태 - Relational Model and Normal Form
+## 1. 관계형 모델과 일반적 형태
 ### 1.1 도입 - INTRODUCTION
 이 논문은 거대한 데이터 포멧 뱅크의 접근을 나누어 제공할 수 있는 시스템에 대한 기본적인 관계 이론을 적용에 대한 내용입니다. Childs [1]의 논문을 제외하고, 데이터 시스템에 관계를 적용시키는 주된 내용은 연역적인 질문 - 응답 시스템에 있었습니다. Levein and Maron [2]는 이 분야 작업에 필요한 수많은 자료를 제공해주었습니다. 이와 대조적으로, 여기서 다뤄지는 문제는 데이터 독립성(데이터 유형의 성장과 데이터 표현의 변화로부터 응용프로그램의 독립성과 터미널 활동의 독립성)와 nondeductive systems(비연역적 시스템)에서 문제가 될 것으로 보이는 특정 종류의 데이터 불일치입니다.
  섹션1의 데이터에 대한 관계적 관점(모델)은 현제 비추론시스템에서 유행중인 그래프나 네트워크 모델[3, 4]에 비해 여러가지 측면에서 더 뛰어날 것으로 보입니다. 관계 모델의 자연적 구조(즉, 기계 표현 포즈를 위한 추가적인 구조를 곂치지 않는 것)만을 가지고 데이터를 묘사할 수 있도록 제공합니다. 따라서, 그것은 프로그램과 다른 한편으로는 기계 표현 그리고 데이터 구성 사이의 독립성을 최대한 산출할 수 있는 높은 수준의 데이터 언어의 기초를 제공합니다.
@@ -294,3 +294,45 @@ If the user’s relational model is set up in normal form, names of items of dat
 R(g).r.d
 
 Where R is a relational name; g is a generation identifier(optional); r is a role name (optional); d is a domain name. Since g is needed only when several generations of a given relation exist, or are anticipated to exist, and r is needed only the the relation R has two or more domains named d, the simple form R.d will often be adequate.
+
+1.5. 몇 가지 언어적 측면
+
+ 위에서 설명한 바와 같이 관계형 데이터 모델의 채택은 술어 계산을 기반으로 하는 범용적인 데이터 하위언어의 개발을 가능하게 한다. 만약, 관계 집합이 일반적인 형태라면 1차 술어 계산으로도 충분합니다. 이러한 언어는 다른 모든 제안된 데이터 언어에 대한 언어적 능력의 기준를 제공하며, 그 자체로 다양한 호스트 언어(프로그래밍, 명령어 또는 문제 지향)에서 임베딩(적절한 구문 수정 포함)할 수 있는 강력한 후보가 될 것입니다.  이러한 언어를 구체적으로 설명하는 것은 본 논문의 목적은 아니지만, 그 주된 특징은 다음과 같습니다.
+ 
+R에 의한 데이터 하위 언어와 H에 의한 호스트 언어를 생각해 봅시다. R은 그들의 도메인들과 관계들의 선언을 제공합니다. 한 관계의 선언들 각각은 그들의 관계에 대한 기본키를 식별합니다. 선언된 관계는 적절한 권한을 가진 사용자 커뮤니티의 모든 구성원이 사용할 수 있도록 시스템 카탈로그에 추가됩니다. H는 이러한 관계가 스토리지에 어떻게 표현되는지를(아마 덜 영속적인) 나타내는 선언에 대한 지원들을 제공합니다. R은 데이터 뱅크에서 데이터 일부분의 검색을 위한 사양을 제공합니다. 이러한 검색 요청에 대한 작업은 보안의 제약 조건에 따라 달라집니다. 데이터 하위 언어의 보편성은 (컴퓨팅 능력이 아니라) 언어를 기술하는 능력에 있습니다. 검색을 위한 데이터를 한정하는데 사용할 수 있는 서브루틴 함수가 유한 개 존재한다고 가정하더라도 거대한 데이터 뱅크에서 데이터의 각 부분 집합은 매우 많은 수의 가능한(그리고 합리적인) 기술(묘사, 설명)들을 갖습니다. 따라서, 스펙 집합에서 사용될 수 있는 표현 조건 클래스는 잘 형성된 술어 계산 공식의 클래스를 기술하는 능력을 가져야 합니다. 이 기술하는 능력을 보존하기 위해 선택된 술어 계산의 모든 공식을 표현할 필요가 없다는 것은 잘 알려져 있습니다. 예를 들어, 프리넥스 표준형 만으로도 충분합니다.
+
+1.5. SOME LINGUISTIC ASPECTS
+
+ The adoption of a relational model of data, as described above, permits the development of a universal data sublanguage based on an applied predicate calculus. A firstOrder predicate calculus suffices if the collection of relations is in normal form. Such a language would provide a yardstick of linguistic power for all other proposed data languages, and would itself be a strong candidate for embedding(with appropriate syntactic modification) in a variety of host languages (programming, command or problem oriented.) While it is not the purpose of this paper to describe such a language in detail, its salient features would be as follows.
+ 
+ Let us denote the data sublanguage. By R and the host language by H. R permits the declaration of relations and their domains. Each declaration of a relation identifies the primary key for that relation. Declared relations are added to the system catalog for use by any members of the user community who have appropriate authorization. H permits supporting declarations which indicate, perhaps less permanently, how these relations are represented in storage. R permits the specification for retrieval of any subset of data from the data bank. Action on such a retrieval request is subject to security constraints.
+ 
+ The universality of the data sublangnage lies in its descriptive ability (not its computing ability). In a large data bank each subset of the data has a very large number of possible (and sensible) descriptions, even when we assume (as we do) that there is only a finite set of function subroutines to which the system has access for use in qualifying data for retrieval. Thus, the class of qualification expressions which can be used in a set specification must have the descriptive power of the class of well-formed formulas of an applied predicate calculus. It is well known that to preserve this descriptive power it is unnecessary to express (in whatever syntax is chosen) every formula of the selected predicate calculus. For example, just those in prenex normal form are adequate.
+
+Arithmetic functions may be needed in the qualification or other parts of retrieval statements. Such functions can be defined in H and invoked in R. 
+
+A set so specified may be fetched for query purposes only, or it may be held for possible changes. Insertions take the form of adding new elements to declared relations with- out regard to any ordering that may be present in their machine representation. Deletions which are effective for the community (as opposed to the individual user or sub- communities) take the form of removing elements from declared relations. Some deletions and updates may be triggered by others, if deletion and update dependencies between specified relations are declared in R. 
+One important effect that the view adopted toward data has on the language used to retrieve it is in the naming of data elements and sets. Some aspects of this have been discussed in the previous section. With the usual network view, users will often be burdened with coining and using more relation names than are absolutely necessary, since names are associated with paths (or path types) rather than with relations. 
+
+ Once a user is aware that a certain relation is stored, he will expect to be able to exploit it using any combination of its arguments as "knowns" and the remaining arguments as "unknowns," because the information (like Everest) is there. This is a system feature (missing from many current information systems) which we shall call (logically) symmetric exploitation of relations. Naturally, symmetry in performance is not to be expected. 
+To support symmetric exploitation of a single binary relation, two directed paths are needed. For a relation of degree n, the number of paths to be named and controlled is n factorial. 
+
+Again, if a relational view is adopted in which every n- ary relation (n > 2) has to be expressed by the user as a nested expression involving only binary relations (see Feldman's LEAP System [10], for example) then 2n - 1 names have to be coined instead of only n + 1 with direct n-ary notation as described in Section 1.2. For example, the 4 -ary relation supply of Figure 1, which entails 5 names in n-ary notation, would be represented in the form 
+
+P (supplier, Q (part, R (project, quantity))) 
+
+in nested binary notation and, thus, employ 7 names. A further disadvantage of this kind of expression is its asymmetry. Although this asymmetry does not prohibit symmetric exploitation, it certainly makes some bases of interrogation very awkward for the user to express (consider, for example, a query for those parts and quantities related to certain given projects via Q and R). 
+
+
+1.6. EXPRESSIBLE,NAMED, AND STORED RELATIONS
+
+ Associated with a data bank are two collections of relations: the named set and the expressible set. The named set is the collection of all those relations that the community of users can identify by means of a simple name (or identifier). A relation R acquires membership in the named set when a suitably authorized user declares R; it loses membership when a suitably authorized user cancels the declaration of R. 
+ 
+The expressible set is the total collection of relations that can be designated by expressions in the data language. Such expressions are constructed from simple names of relations in the named set; names of generations, roles and domains; logical connectives; the quantifiers of the predicate calculus; and certain constant relation symbols such as =, >. The named set is a subset of the expressible set—usually a very small subset. 
+
+Since some relations in the named set may be time-independent combinations of others in that set, it is useful to consider associating with the named set a collection of statements that define these time-independent constraints. We shall postpone further discussion of this until we have introduced several operations on relations (see Section 2). 
+
+One of the major problems confronting the designer of a data system which is to support a relational model for its users is that of determining the class of stored representations to be supported. Ideally, the variety of permitted data representations should be just adequate to cover the spectrum of performance requirements of the total collection of installations. Too great a variety leads to un- necessary overhead in storage and continual reinterpretation of descriptions for the structures currently in effect. 
+
+For any selected class of stored representations the data system must provide a means of translating user requests expressed in the data language of the relational model into corresponding--and efficient--actions on the current stored representation. For a high level data language this presents a challenging design problem. Nevertheless, it is a problem which must be solved--as more users obtain concurrent access to a large data bank, responsibility for providing efficient response and throughput shifts from the individual user to the data system. 
+
