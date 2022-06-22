@@ -247,7 +247,21 @@ The terms attribute and repeating group in present data base terminology are rou
 그림 3(a)의 관계들을 정규화한 결과는 그림 3(b)의 관계 집합입니다. 정규화로 어떤 키가 확장되었는지 보여주기 위해 각 관계의 기본키는 기울림꼴로 나타냈습니다. 위에서 설명한 정규화가 적용 가능하다면, 정규화되지 않는 관계들의 집합은 반드시 다음 조건을 만족합니다.
 
 (1) 단순하지 않은 도메인의 상호 관계에 대한 그래프는 트리의 모음입니다.
-(2) 단순하지 않은 도메인의 구성에는 기본키가 없습니다.?
+(2) 단순하지 않은 도메인의 구성은 기본키를 가지지 않습니다.
+
+필자는 정규화 작업이 가능하면서 동시에 이런 조건들을 완화하여 적용할 수 없다는 것을 압니다. 이것들은 이 논문에서 논의되지 않습니다.
+
+모든 관계가 정상적인 형태로 구현될 때 실현할 수 있는 배열 표현의 단순성은 저장 목적뿐만 아니라 폭 넓게 서로 다른 데이터 표현을 사용하는 시스템 간의 대량 데이터 통신에도 유리합니다.  통신 형태는 배열 표현을 적절히 압축한 버전이며, 다음과 같은 장점이 있습니다.
+
+(1) 포인터(주소 값 또는 변위 값)가 없을 것입니다.
+(2) 해시 어드레싱 체계에 대한 모든 의존을 피할 것입니다.
+(3) 색인이나 순서 목록이 포함되지 않습니다.
+
+사용자의 관계형 모델이 일반적인 형태로 설정된 경우, 데이터 뱅크 속에 있는 데이터 항목의 이름은 그렇지 않은 경우보다 더 간단한 형태를 취할 수 있습니다.  일반적인 이름은 다음과 같은 형식을 취합니다.
+
+R(g).r.d
+
+여기서 R은 관계 이름이고, g는 세대 식별자(선택 사항), r은 역할 이름(선택 사항), d는 도메인 이름입니다. g는 주어진 관계가 여러 세대로 존재하거나 존재할 것으로 예상될 때에만 필요하며, r은 관계 R이 d라는 동일한 이름을 두 개 이상의 도메인을 갖는 관계일 때 필요하기 때문에, 간단한 형태인 R.d이 자주 적절할 것입니다.
 
 1.4. NOMAL FORM
 
@@ -264,3 +278,19 @@ If normalization as described above is to be applicable, the unnormalized collec
 (1) The graph of interrelationships of the non simple domains is a collection of trees.
 
 (2) No primary key has a component domain which is non simple.
+
+The writer knows of no application which would require ant relaxation of these conditions. Further operations of a normalizing kind are possible. These are not discussed in this paper.
+
+The simplicity of the array representation which becomes feasible when all relations are cast in normal form is not only an advantage for storage purposes but also for communication of bulk data between systems which use widely different representations of the data. The communication form would be a suitably compressed version of the array representation and would have the following advantages :
+
+(1) It would be devoid of pointers (address-valued or displacement-value).
+
+(2) It would avoid all dependence on hash addressing schemes.
+
+(3) It would contain no indices or ordering lists.
+
+If the user’s relational model is set up in normal form, names of items of data in the data bank can take a simpler form than would otherwise be the case. A general name would take a form such as 
+
+R(g).r.d
+
+Where R is a relational name; g is a generation identifier(optional); r is a role name (optional); d is a domain name. Since g is needed only when several generations of a given relation exist, or are anticipated to exist, and r is needed only the the relation R has two or more domains named d, the simple form R.d will often be adequate.
